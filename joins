@@ -1,0 +1,56 @@
+CREATE TABLE AUTHORS
+  2  (
+  3      AUTHORID NUMBER PRIMARY KEY,
+  4      AUTHORNAME VARCHAR2(20),
+  5      CITY VARCHAR2(20),
+  6      ZIP NUMBER
+  7  );
+
+Table created.
+
+SQL> ALTER TABLE AUTHORS
+  2  ADD BID NUMBER;
+
+Table altered.
+
+SQL> INSERT INTO AUTHORS VALUES (10,'JAMES GOSLING','NY',123,1001);
+
+1 row created.
+
+SQL> INSERT INTO AUTHORS VALUES (20,'TONNY ROBBINS','NJ',556,1020);
+
+1 row created.
+
+SQL> INSERT INTO AUTHORS VALUES (30,'JACK CANFIELD','ND',889,NULL);
+
+1 row created.
+
+SQL> SELECT * FROM AUTHORS;
+
+  AUTHORID AUTHORNAME           CITY                        ZIP        BID
+---------- -------------------- -------------------- ---------- ----------
+        10 JAMES GOSLING        NY                          123       1001
+        20 TONNY ROBBINS        NJ                          556       1020
+        30 JACK CANFIELD        ND                          889
+
+SQL> CREATE TABLE BOOKS
+  2  (
+  3    BOOKID NUMBER PRIMARY KEY,
+  4    BOOKNAME VARCHAR2(20),
+  5    BOOKPRICE NUMBER,
+  6    AID NUMBER
+  7  );
+
+Table created.
+
+SQL> INSERT INTO BOOKS VALUES (1001,'JAVA11',1500,10);
+
+1 row created.
+
+SQL> INSERT INTO BOOKS VALUES (1020,'BE A LEADER',1200,20);
+
+1 row created.
+
+SQL> INSERT INTO BOOKS VALUES (1030,'THE 8TH HABIT',1800,NULL);
+
+1 row created.
