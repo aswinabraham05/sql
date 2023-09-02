@@ -245,3 +245,53 @@ CREATE TABLE MYEMP6
      CONSTRAINT COMM_GT_500 CHECK (COMM > 500),
      CONSTRAINT CHECK_FK_DEPTNO FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO)
   )
+
+
+COMPOSITE PRIMARY KEY
+
+
+	STUDENT
+	------------
+	STD DIV ROLLNO NAME EMAIL AGE
+	---------------------------------------
+	X   A   1       JACK  ...  15
+	X   A   2 	...
+	X   B   1 
+	IX  A   1
+	VII B   1
+
+
+CREATE TABLE STUDENT
+(
+   STD VARCHAR2(10),
+   DIV VARCHAR2(5),
+   ROLLNO NUMBER,
+   SNAME VARCHAR2(20) NOT NULL,
+   EMAIL VARCHAR2(30) UNIQUE,
+   AGE NUMBER CHECK (AGE > 5),
+   PRIMARY KEY(STD,DIV,ROLLNO)
+)
+
+	STUDENT_MARKS
+	--------------------
+
+	<-----FK------------->
+	STD	DIV	ROLLNO	SEM	PHY	CHEM	MATHS	TOTAL	PER	GRADE
+	--------------------------------------------------------------------------
+	X	A	1	I	90	90	90	270	..	..
+	X	A	1	II	95	95	95	285	..	..
+	X	A	1	III	100	100	100	300	..	..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
