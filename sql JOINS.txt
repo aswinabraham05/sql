@@ -149,3 +149,80 @@ CREATE TABLE MYEMP5
  16* )
 
 
+
+
+
+WHEN JOB WAS ACCOUNTANT ->  check constraint (SYSTEM.SYS_C008409) violated
+WHEN SAL < COMM ->          check constraint (SYSTEM.SYS_C008410) violated
+WHEN SAL WAS 5000 - >       check constraint (SYSTEM.SYS_C008411) violated
+WHEN COMM WAS 400 ->        check constraint (SYSTEM.SYS_C008412) violated
+WHEN PK   VIOLATED ->      unique constraint (SYSTEM.SYS_C008413) violated
+WHEN DEPTNO AS FK WAS 60-> ORA-02291: integrity constraint (SYSTEM.SYS_C008414) violated - parent key not found
+
+
+
+CREATE TABLE MYEMP5
+    (
+      EMPNO number,
+      ename varchar2(20),
+      job  varchar2(20),
+      hiredate date,
+      sal number,
+      comm number,
+      deptno number,
+     PRIMARY KEY (EMPNO),
+     CHECK (JOB IN ('SALESMAN','MANAGER','CLERK')),
+     CHECK (SAL > COMM),
+     CHECK (SAL > 50000),
+     CHECK (COMM > 500),
+     FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO)
+  )
+
+SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION, STATUS
+FROM USER_CONSTRAINTS
+WHERE TABLE_NAME='MYEMP5' ORDER BY CONSTRAINT_NAME
+/
+
+
+ALTER TABLE MYEMP5
+  DISABLE CONSTRAINT SYS_C008412;
+
+Table altered.
+
+SQL> INSERT INTO MYEMP5
+    VALUES (1115,'JACK','SALESMAN','12-JAN-2023',51000,50,20);
+
+1 row created.
+
+
+
+
+SQL> UPDATE MYEMP5 SET COMM=600 WHERE EMPNO=1115;
+
+1 row updated.
+
+SQL> ALTER TABLE MYEMP5
+    ENABLE CONSTRAINT SYS_C008412;
+
+Table altered.
+
+
+
+
+SQL> ALTER TABLE MYEMP5
+    DROP CONSTRAINT SYS_C008412;
+
+Table altered.
+
+SQL> ALTER TABLE MYEMP5
+  2  DISABLE PRIMARY KEY;
+
+Table altered.
+
+SQL> ALTER TABLE MYEMP5
+  2  DROP PRIMARY KEY;
+
+Table altered.
+
+SQL> ALTER TABLE MYEMP5
+  2  ADD PRIMARY KEY (EMPNO);
