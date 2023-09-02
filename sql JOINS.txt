@@ -226,3 +226,22 @@ Table altered.
 
 SQL> ALTER TABLE MYEMP5
   2  ADD PRIMARY KEY (EMPNO);
+
+
+
+CREATE TABLE MYEMP6
+    (
+      EMPNO number,
+      ename varchar2(20),
+      job  varchar2(20),
+      hiredate date,
+      sal number,
+      comm number,
+      deptno number,
+     CONSTRAINT MYPK PRIMARY KEY (EMPNO),
+     CONSTRAINT CHECK_JOB CHECK (JOB IN ('SALESMAN','MANAGER','CLERK')),
+     CONSTRAINT  SAL_GT_COMM CHECK (SAL > COMM),
+     CONSTRAINT  SAL_GT_50K CHECK (SAL > 50000),
+     CONSTRAINT COMM_GT_500 CHECK (COMM > 500),
+     CONSTRAINT CHECK_FK_DEPTNO FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO)
+  )
